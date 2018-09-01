@@ -10,6 +10,16 @@ const server = new WebpackDevServer(compiler, {
   stats: { colors: true, progress: true },
   disableHostCheck: true,
   before(app) {
+    const asc = require("assemblyscript/bin/asc");
+    asc.main([
+      "main.ts",
+      "--baseDir", "assembly",
+      "--binaryFile", "../out/main.wasm",
+      "--sourceMap",
+      "--measure"
+    ], (error) => {
+      console.log('wasm 文件编译完成');
+    });
     /*
      * 路由处理方法
      */
