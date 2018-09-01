@@ -1,0 +1,12 @@
+.idea
+.vscode
+.DS_Store
+*.diff
+npm-debug.log
+
+node_modules
+dist
+_dist
+out
+temp
+tmp
