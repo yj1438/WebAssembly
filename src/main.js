@@ -1,17 +1,9 @@
-WebAssembly.instantiateStreaming(fetch("../out/main.wasm"), {
-  env: {
-    sayHello() {
-      console.log("Hello from WebAssembly!");
-    },
-    abort(msg, file, line, column) {
-      console.error("abort called at main.ts:" + line + ":" + column);
-    }
-  },
-  console: {
-    logi(value) { console.log('logi: ' + value); },
-    logf(value) { console.log('logf: ' + value); }
-  }
-}).then(result => {
-  const exports = result.instance.exports;
-  document.getElementById("container").innerText = "Result: " + exports.add(19, 23);
-}).catch(console.error);
+import deps from './js/deps';
+
+WebAssembly.instantiateStreaming(fetch("../out/main.wasm"), deps)
+  .then(result => {
+    const asmModule = result.instance.exports;
+    console.log(asmModule);
+    const res = asmModule.add(19, 23);
+    console.log(res);
+  }).catch(console.error);

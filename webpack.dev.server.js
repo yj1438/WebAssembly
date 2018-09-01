@@ -26,7 +26,6 @@ const server = new WebpackDevServer(compiler, {
     const routerCb = (req, res, next) => {
       const regResult = req.url.match(/(\/.+)*\/(.+?.wasm)/);
       const filename = regResult[2];
-      console.log('获取 wasm 文件: ' + filename);
       const options = {
         root: __dirname + '/out/',
         dotfiles: 'deny',

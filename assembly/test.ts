@@ -1,14 +1,13 @@
-
 var w: u32, // width
   h: u32, // height
   s: u32; // total size
 
 /** Initializes width and height. */
-// export default function init(w_: u32, h_: u32): void {
-//   w = w_;
-//   h = h_;
-//   s = w * h;
-// }
+export function init(w_: u32, h_: u32): void {
+  w = w_;
+  h = h_;
+  s = w * h;
+}
 
 /** Performs one step. */
 export function step(): void {
