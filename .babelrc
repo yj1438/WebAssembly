@@ -1,0 +1,14 @@
+{
+  "presets": [
+    "@babel/preset-env"
+  ],
+  "plugins": [
+    ["@babel/plugin-transform-runtime", {
+      "targets": {
+        "chrome": 57,
+        "android": "4.3",
+        "ios": "8"
+      }
+    }]
+  ]
+}

@@ -1,6 +1,7 @@
-const WebpackDevServer = require('webpack-dev-server');
-const webpack = require('webpack');
 const path = require('path');
+const webpack = require('webpack');
+const WebpackDevServer = require('webpack-dev-server');
+const chalk = require('chalk');
 const webpackConfig = require('./webpack.config');
 
 const compiler = webpack(webpackConfig);
@@ -42,7 +43,11 @@ const server = new WebpackDevServer(compiler, {
       });
     };
     app.get('/**/*.wasm', routerCb);
+  },
+  after() {
+    console.log(chalk.green('http://localhost:8080/'));
   }
 });
 
-server.listen(8080, 'localhost', function() {});
+server.listen(8080, 'localhost', function() {
+});

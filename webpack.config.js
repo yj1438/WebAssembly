@@ -6,11 +6,17 @@ module.exports = {
     index: './src/index.js',
     main: './src/main.js'
   },
+  // resolve: {
+  //   root: 'src',
+  //   extensions: [ '', '.js', '.ts' ],
+  //   modulesDirectories: [ 'node_modules' ],
+  // },
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].js',
     // chunkFilename: '[name].js'
   },
+  devtool: 'cheap-module-source-map',
   module: {
     rules: [
       {
@@ -24,6 +30,11 @@ module.exports = {
           publicPath: '',
           outputPath: ''
         }
+      },
+      {
+        test: /\.js$/,
+        use: ['babel-loader'],
+        exclude: /node_modules/,
       }
     ]
   }
