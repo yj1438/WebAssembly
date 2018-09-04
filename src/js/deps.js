@@ -13,8 +13,8 @@ export default {
         maximum: 0,
         element: 'anyfunc',
     }),
-    sayHello: function() {
-      console.log("Hello from WebAssembly!");
+    jsHellow: function() {
+      console.log("Hello from JS!");
     },
     abort(msg, file, line, column) {
       console.error("abort called at main.ts:" + line + ":" + column);

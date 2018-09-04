@@ -1,9 +1,8 @@
-import deps from './js/deps';
+import wasmModules from './js/wasmModule1';
 
-WebAssembly.instantiateStreaming(fetch("../out/main.wasm"), deps)
-  .then(result => {
-    const asmModule = result.instance.exports;
-    console.log(asmModule);
-    const res = asmModule.add(19, 23);
-    console.log(res);
-  }).catch(console.error);
+wasmModules.then(asmModule => {
+  // 你可以直接把 wasm 文件作为 import 对象引入
+  console.log(asmModule);
+  const res = asmModule.add(19, 23);
+  console.log(res);
+}).catch(console.error);
