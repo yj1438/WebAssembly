@@ -21,6 +21,19 @@ export default {
     }
     return pixelData;
   },
+
+  grayScale(pixelData) {
+    const len = pixelData.length;
+    for (let i = 0; i < len; i = i + 4) {
+      const _pixel = pixelData.slice(i, i + 4);
+      const [r, g, b, a] = _pixel;
+      pixelData[i] = r;
+      pixelData[i + 1] = r;
+      pixelData[i + 2] = r;
+      pixelData[i + 3] = a;
+    }
+  },
+
   reverse(pixelData) {
     const len = pixelData.length;
     for (let i = 0; i < len; i = i + 4) {

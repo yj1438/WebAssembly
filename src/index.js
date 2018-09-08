@@ -1,6 +1,6 @@
 import filter from './js/filter';
 
-const IMG_URL = '/demopic.jpg';
+const IMG_URL = '/img/demopic.jpg';
 
 const canvas = document.getElementById('canvas');
 const canvasRes = document.getElementById('canvasRes');
@@ -19,12 +19,20 @@ img.onload = () => {
   setTimeout(() => {
     const imgData = ctx.getImageData(0, 0, width, height);
     const pixelData = imgData.data;
-    const tmpImgData = ctx.getImageData(0, 0, width, height);
-    const tmpPixelData = tmpImgData.data;
     console.log('总共计算象素: ' + pixelData.length);
     console.time();
+
+    const len = pixelData.length
+    const mem = window._malloc(len);
+    window.HEAPU8.set(pixelData, mem); 
+    window.Module.asm._comic(mem, len);
+    const filtered = window.HEAPU8.subarray(mem, mem + len);
+    window._free(mem);
+    pixelData.set(filtered)
+
+    // filter.grayScale(pixelData);
     // filter.reverse(pixelData);
-    filter.comic(pixelData);
+    // filter.comic(pixelData);
     // filter.blur(pixelData, tmpPixelData, width, height);
     ctxR.putImageData(imgData , 0 , 0 , 0 , 0 , width , height);
     console.timeEnd();
