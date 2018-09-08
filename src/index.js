@@ -25,7 +25,7 @@ img.onload = () => {
     const len = pixelData.length
     const mem = window._malloc(len);
     window.HEAPU8.set(pixelData, mem); 
-    window.Module.asm._comic(mem, len);
+    window.Module.asm._grayScale(mem, len);
     const filtered = window.HEAPU8.subarray(mem, mem + len);
     window._free(mem);
     pixelData.set(filtered)
