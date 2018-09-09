@@ -1,12 +1,15 @@
-const WebpackDevServer = require('webpack-dev-server');
-const webpack = require('webpack');
 const path = require('path');
+const webpack = require('webpack');
+const WebpackDevServer = require('webpack-dev-server');
+const chalk = require('chalk');
 const webpackConfig = require('./webpack.config');
 
 const compiler = webpack(webpackConfig);
 
+const PORT = 8088;
+
 const server = new WebpackDevServer(compiler, {
-  contentBase: path.join(__dirname, 'html'),
+  contentBase: path.join(__dirname, 'www'),
   stats: { colors: true, progress: true },
   disableHostCheck: true,
   before(app) {
@@ -18,6 +21,9 @@ const server = new WebpackDevServer(compiler, {
       "--sourceMap",
       "--measure"
     ], (error) => {
+      if (error) {
+        throw error;
+      }
       console.log('wasm 文件编译完成');
     });
     /*
@@ -42,7 +48,10 @@ const server = new WebpackDevServer(compiler, {
       });
     };
     app.get('/**/*.wasm', routerCb);
+  },
+  after() {
+    console.log(chalk.green('http://localhost:' + PORT + '/'));
   }
 });
 
-server.listen(8080, 'localhost', function() {});
+server.listen(PORT, 'localhost', function() {});
